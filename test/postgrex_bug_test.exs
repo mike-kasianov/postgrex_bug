@@ -8,12 +8,10 @@ defmodule PostgrexBugTest do
       email: "bug@gmail.com",
     }
 
-    assert_raise FunctionClauseError, fn ->
-      Ecto.Adapters.SQL.Sandbox.unboxed_run(PostgrexBug.Repo, fn ->
-        # The problem is here!
-        PostgrexBug.Repo.insert(account)
-      end)
-    end
+    Ecto.Adapters.SQL.Sandbox.unboxed_run(PostgrexBug.Repo, fn ->
+      # The problem is here!
+      PostgrexBug.Repo.insert(account)
+    end)
   end
 
   test "valid insert" do
